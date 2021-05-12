@@ -38,14 +38,14 @@
 					</span>
 					
 					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<div class="wrap-input100 validate-input" data-validate="Usuario es requerido">
 						<input class="input100" type="text" name="username" id="username" autocomplete="new-password">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Usuario</span>
 					</div>
 					
 					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
+					<div class="wrap-input100 validate-input" data-validate="Contraseña es requerida">
 						<input class="input100" type="password" name="password" id="password">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Contraseña</span>
@@ -68,7 +68,7 @@
 			
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" onclick="VerifyUser()">
 							INGRESAR
 						</button>
 					</div>
@@ -116,5 +116,7 @@
 	<script src="js/main.js"></script>
 <!--===============================================================================================-->
 	<script src="js/login.js"></script>
+<!--===============================================================================================-->
+	<script src="./../js/user.js"></script>
 </body>
 </html>
