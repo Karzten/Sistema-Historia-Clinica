@@ -9,7 +9,8 @@
         public function __construct(){
             $this->server = "localhost";
             $this->user = "root";
-            $this->password = "clinica";
+            $this->password = "";
+            $this->database = "clinica";
         }
 
         function connect(){

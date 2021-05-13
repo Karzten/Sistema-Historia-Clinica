@@ -6,5 +6,18 @@ function VerifyUser(){
         return Swal.fire("Mensaje de advertencia", "Llene los campos vacíos", "warning");
     }
 
-    alert("Hola");
+    $.ajax({
+        url: '../controller/user/verify_user.php',
+        type: 'POST',
+        data:{
+            username: username,
+            password: password
+        }
+    }).done(function(resp){
+        if(resp==0){
+            Swal.fire("Mensaje de error", 'Usuario y/o contraseña incorrecta', "error");
+        }else{
+            Swal.fire("Mensaje de confirmación", 'Bienvenido al sistema', "success");
+        }
+    })
 }
