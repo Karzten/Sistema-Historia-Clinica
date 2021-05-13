@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Iniciar Sesión</title>
+	<title>Sistema Clínico</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -11,7 +11,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->	
@@ -27,77 +27,66 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
-<body style="background-color: #666666;">
+<body>
 	
 	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form">
-					<span class="login100-form-title p-b-43">
-						Iniciar Sesión
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+					<span class="login100-form-title p-b-49">
+						INICIAR SESIÓN
 					</span>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Usuario es requerido">
-						<input class="input100" type="text" name="username" id="username" autocomplete="new-password">
-						<span class="focus-input100"></span>
+
+					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
 						<span class="label-input100">Usuario</span>
+						<input class="input100" type="text" name="username" placeholder="Escriba el usuario" id="username" autocomplete="new-password">
+						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Contraseña es requerida">
-						<input class="input100" type="password" name="password" id="password">
-						<span class="focus-input100"></span>
+
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">Contraseña</span>
-					</div>
-
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Recordarme
-							</label>
-						</div>
-
-						<div>
-							<a href="#" class="txt1">
-								¿Olvidó la contraseña?
-							</a>
-						</div>
-					</div>
-			
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" onclick="VerifyUser()">
-							INGRESAR
-						</button>
+						<input class="input100" type="password" name="pass" placeholder="Escriba la contraseña" id="password">
+						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					
-					<div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							o iniciar sesión usando
-						</span>
-					</div>
-
-					<div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-						</a>
-
-						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-							<i class="fa fa-twitter" aria-hidden="true"></i>
+					<div class="text-right p-t-8 p-b-31">
+						<a href="#">
+							¿Olvidaste la contraseña?
 						</a>
 					</div>
-				</form>
+					
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn" onclick="VerifyUser()">
+								ACCEDER
+							</button>
+						</div>
+					</div><br>
 
-				<div class="login100-more" style="background-image: url('images/bg-01.jpg');">
-				</div>
+					<div class="flex-c-m">
+						<a href="#" class="login100-social-item bg1">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="login100-social-item bg2">
+							<i class="fa fa-twitter"></i>
+						</a>
+
+						<a href="#" class="login100-social-item bg3">
+							<i class="fa fa-google"></i>
+						</a>
+					</div>
 			</div>
 		</div>
 	</div>
 	
+
+	<div id="dropDownSelect1"></div>
+
 <!--===============================================================================================-->
-	<script src="vendor/sweetalert2/sweetalert2.js"></script>	
+	<script src="vendor/sweetalert2/sweetalert2.js"></script>
+<!--===============================================================================================-->
+	
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -115,8 +104,10 @@
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 <!--===============================================================================================-->
-	<script src="js/login.js"></script>
-<!--===============================================================================================-->
 	<script src="./../js/user.js"></script>
+
 </body>
+<script>
+username.focus();
+</script>
 </html>

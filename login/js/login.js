@@ -1,1 +1,1 @@
-txt_username.focus();
+username.focus();
