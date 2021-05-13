@@ -17,7 +17,47 @@ function VerifyUser(){
         if(resp==0){
             Swal.fire("Mensaje de error", 'Usuario y/o contraseña incorrecta', "error");
         }else{
-            Swal.fire("Mensaje de confirmación", 'Bienvenido al sistema', "success");
+            var data = JSON.parse(resp);
+            if(data[0][5]=='INACTIVO'){
+                return Swal.fire("Mensaje de advertencia", 'Lo sentimos, el usuario '+username+' se encuentra suspendido' , "warning");
+            }
+            $.ajax({
+                url: '../controller/user/create_session.php',
+                type: 'POST',
+                data:{
+                user_id: data[0][0],
+                user: data[0][1],
+                role: data[0][4],
+                }
+            }).done(function(resp){
+                let timerInterval
+                Swal.fire({
+                title: 'BIENVENIDO AL SISTEMA',
+                html: 'Usted será redireccionado en <b></b> milisegundos.',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    timerInterval = setInterval(() => {
+                    const content = Swal.getContent()
+                    if (content) {
+                        const b = content.querySelector('b')
+                        if (b) {
+                        b.textContent = Swal.getTimerLeft()
+                        }
+                    }
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    location.reload();
+                }
+                })
+            })
         }
     })
 }
