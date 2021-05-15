@@ -1,3 +1,4 @@
+<script type="text/javascript" src="../js/user.js?rev=<?php echo time();?>"></script>
 <div class="col-md-12">
     <div class="box box-warning box-solid">
         <div class="box-header with-border">
@@ -11,9 +12,46 @@
         </div>
             <!-- /.box-header -->
             <div class="box-body">
-              CONTENIDO USUARIO
+            <div class="form-group">
+              <div class="col-lg-10">
+                <div class="input-group">
+                  <input type="text" class="global_filter form-control" id="global_filter" placeholder="Ingresar dato a buscar">
+                  <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <button class="btn btn-danger" style="width:100%"><i class="glyphicon glyphicon-plus"></i>Nuevo Usuario</button>
+              </div>
+            </div>
+              <table id="user_table" class="display responsive nowrap" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                    <th>Sexo</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>#</th>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                    <th>Sexo</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
             <!-- /.box-body -->
     </div>
           <!-- /.box -->
 </div>
+<script>
+$(document).ready(function() {
+  ListUser();
+} );
+</script>

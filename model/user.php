@@ -22,6 +22,18 @@
                 $this->connection->close();
             }
         }
+
+        function ListUser(){
+            $sql = "CALL SP_LIST_USER()";
+            $array = array();
+            if ($query = $this->connection->connection->query($sql)){
+                while ($query_VU = mysqli_fetch_assoc($query)) {
+                    $array["data"][]=$query_VU;
+                }
+                return $array;
+                $this->connection->close();
+            }
+        }
     }
 
     

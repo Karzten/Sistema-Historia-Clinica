@@ -61,3 +61,55 @@ function VerifyUser(){
         }
     })
 }
+
+function ListUser(){
+    table = $("#user_table").DataTable({
+       "ordering":false,
+       "paging": false,
+       "searching": { "regex": true },
+       "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+       "pageLength": 10,
+       "destroy":true,
+       "async": false ,
+       "processing": true,
+       "ajax":{
+           "url":"../controller/user/list_user.php",
+           type:'POST'
+       },
+       "columns":[
+           {"data":"numero"},
+           {"data":"username"},
+           {"data":"name"},
+           {"data":"gender"},
+           {"data":"status",
+           render: function (data, type, row ) {
+               if(data=='ACTIVO'){
+                   return "<span class='label label-success'>"+data+"</span>";                   
+               }else{
+                 return "<span class='label label-danger'>"+data+"</span>";                 
+               }
+             }
+           },  
+           {"defaultContent":"<button style='font-size:13px;' type='button' class='editar btn btn-primary'><i class='fa fa-edit'></i>"}
+       ],
+
+       "language":idioma_espanol,
+       select: true
+   });
+
+   document.getElementById("user_table_filter").style.display="none";
+
+    $('input.global_filter').on( 'keyup click', function () {
+        filterGlobal();
+    } );
+
+    $('input.column_filter').on( 'keyup click', function () {
+        filterColumn( $(this).parents('tr').attr('data-column') );
+    });
+}
+
+function filterGlobal() {
+    $('#user_table').DataTable().search(
+        $('#global_filter').val(),
+    ).draw();
+}
