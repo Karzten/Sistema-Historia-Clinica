@@ -113,3 +113,8 @@ function filterGlobal() {
         $('#global_filter').val(),
     ).draw();
 }
+
+function OpenRegisterModal(){
+    $("#register_modal").modal({backdrop: 'static', keyboard: false});
+    $("#register_modal").modal('show');
+}
