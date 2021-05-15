@@ -20,7 +20,7 @@
                 </div>
               </div>
               <div class="col-lg-2">
-                <button class="btn btn-danger" style="width:100%"><i class="glyphicon glyphicon-plus"></i>Nuevo Usuario</button>
+                <button class="btn btn-danger" style="width:100%" onclick="OpenRegisterModal()"><i class="glyphicon glyphicon-plus"></i>Nuevo Usuario</button>
               </div>
             </div>
               <table id="user_table" class="display responsive nowrap" style="width: 100%">
@@ -49,6 +49,42 @@
             <!-- /.box-body -->
     </div>
           <!-- /.box -->
+</div>
+
+<div class="modal fade" id="register_modal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Registro de Usuario</h4>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="col-lg-12">
+          <label for="">Usuario</label>
+          <input type="text" class="form-control" id="username" placeholder="Ingrese nombre de usuario"><br>
+        </div>
+
+        <div class="col-lg-12">
+          <label for="">Contraseña</label>
+          <input type="password" class="form-control" id="password" placeholder="Ingrese contraseña"><br>
+        </div>
+
+        <div class="col-lg-12">
+          <label for="">Repita la contraseña</label>
+          <input type="password" class="form-control" id="password_confirmation" placeholder="Repita la contraseña"><br>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
 </div>
 <script>
 $(document).ready(function() {
