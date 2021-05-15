@@ -33,8 +33,10 @@
   <link rel="stylesheet" href="../assets/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="../assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-  <!-- bootstrap wysihtml5 - text editor -->
+  <!-- DataTables -->
   <link rel="stylesheet" href="../assets/plugins/DataTables/datatables.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="../assets/plugins/select2/select2.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -804,8 +806,10 @@
 <script src="../assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="../assets/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- FastClick -->
+<!-- DataTables -->
 <script src="../assets/plugins/DataTables/datatables.min.js"></script>
+<!-- Select2 -->
+<script src="../assets/plugins/select2/select2.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
