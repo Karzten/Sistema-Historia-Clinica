@@ -62,6 +62,8 @@ function VerifyUser(){
     })
 }
 
+var table = "";
+
 function ListUser(){
     table = $("#user_table").DataTable({
        "ordering":false,
@@ -117,4 +119,71 @@ function filterGlobal() {
 function OpenRegisterModal(){
     $("#register_modal").modal({backdrop: 'static', keyboard: false});
     $("#register_modal").modal('show');
+}
+
+function ListComboRole(){
+    $.ajax({
+        "url":"../controller/user/list_combo_role.php",
+        type:'POST'
+    }).done(function(resp){
+        var data = JSON.parse(resp);
+        var chain = "";
+        if(data.length>0){
+            for(var i = 0; i < data.length; i++){
+                chain+="<option value='"+data[i][0]+"'>"+data[i][1]+"</option>";
+            }
+            $("#cbxRole").html(chain);
+        }else{
+            chain+="<option value=''>NO SE ENCONTRARON DATOS</option>";
+        }
+    })
+}
+
+function RegisterUser(){
+    var username = $("#txtUsername").val();
+    var password = $("#txtPassword").val();
+    var confirmation = $("#txtConfirmation").val();
+    var gender = $("#cbxGender").val();
+    var role = $("#cbxRole").val();
+
+    if(username.length==0 || password.length==0 || confirmation.length==0 || gender.length==0 || role.length==0){
+        return Swal.fire("Mensaje de Advertencia", "Llene los campos vacíos", "warning");
+    }
+
+    if(password != confirmation){
+        return Swal.fire("Mensaje de Advertencia", "Las contraseñas no coinciden", "warning");
+    }
+
+    $.ajax({
+        "url":"../controller/user/register_user.php",
+        type: 'POST',
+        data:{
+            username:username,
+            password:password,
+            gender: gender,
+            role: role
+        }
+    }).done(function(resp){
+        alert(resp);
+        if(resp>0){
+            if(resp==1){
+                $("#register_modal").modal('hide');
+                Swal.fire("Mensaje de Confirmación", "Nuevo usuario registrado", "success")
+                .then((value)=>{
+                    CleanRegister();
+                    table.ajax.reload();
+                });;
+            }else{
+                Swal.fire("Mensaje de Advertencia", "Lo sentimos, el nombre de usuario no se encuentra disponible", "warning");
+            }
+        }else{
+            Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar el registro", "error");
+        }
+    })
+}
+
+function CleanRegister(){
+    $("#txtUsername").val("");
+    $("#txtPassword").val("");
+    $("#txtConfirmation").val("");
 }

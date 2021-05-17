@@ -51,43 +51,68 @@
           <!-- /.box -->
 </div>
 
-<div class="modal fade" id="register_modal" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
+<form action="" autocomplete="false" onsubmit="return false">
+  <div class="modal fade" id="register_modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
 
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Registro de Usuario</h4>
-      </div>
-
-      <div class="modal-body">
-
-        <div class="col-lg-12">
-          <label for="">Usuario</label>
-          <input type="text" class="form-control" id="username" placeholder="Ingrese nombre de usuario"><br>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Registro de Usuario</h4>
         </div>
 
-        <div class="col-lg-12">
-          <label for="">Contraseña</label>
-          <input type="password" class="form-control" id="password" placeholder="Ingrese contraseña"><br>
+        <div class="modal-body">
+
+          <div class="col-lg-12">
+            <label for="">Usuario</label>
+            <input type="text" class="form-control" id="txtUsername" placeholder="Ingrese nombre de usuario"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Contraseña</label>
+            <input type="password" class="form-control" id="txtPassword" placeholder="Ingrese contraseña"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Repita la contraseña</label>
+            <input type="password" class="form-control" id="txtConfirmation" placeholder="Repita la contraseña"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Sexo</label>
+            <select class="js-example-basic-single" name="state" id="cbxGender" style="width:100%;">
+              <option value="MASCULINO">MASCULINO</option>
+              <option value="FEMENINO">FEMENINO</option>
+            </select><br><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Rol</label>
+            <select class="js-example-basic-single" name="state" id="cbxRole" style="width:100%;">
+
+            </select><br><br>
+          </div>
+
         </div>
 
-        <div class="col-lg-12">
-          <label for="">Repita la contraseña</label>
-          <input type="password" class="form-control" id="password_confirmation" placeholder="Repita la contraseña"><br>
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="RegisterUser()">Registrar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
         </div>
 
       </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div>
-
     </div>
   </div>
-</div>
+</form>
+
+
 <script>
 $(document).ready(function() {
   ListUser();
+  $('.js-example-basic-single').select2();
+  ListComboRole();
+  $("#register_modal").on('shown.bs.modal', function(){
+    $("#txtUsername").focus();
+  })
 } );
 </script>

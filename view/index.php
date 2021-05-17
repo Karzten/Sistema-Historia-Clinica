@@ -810,6 +810,8 @@
 <script src="../assets/plugins/DataTables/datatables.min.js"></script>
 <!-- Select2 -->
 <script src="../assets/plugins/select2/select2.min.js"></script>
+<!-- Sweetalert2 -->
+<script src="../assets/plugins/sweetalert2/sweetalert2.js"></script>
 <!-- AdminLTE App -->
 <script src="../assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

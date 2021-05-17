@@ -34,6 +34,29 @@
                 $this->connection->close();
             }
         }
+
+        function ListComboRole(){
+            $sql = "CALL SP_LIST_COMBO_ROLE()";
+            $array = array();
+            if ($query = $this->connection->connection->query($sql)){
+                while ($query_VU = mysqli_fetch_array($query)) {   
+                    $array[] = $query_VU;    
+                }
+                return $array;
+                $this->connection->close();
+            }
+        }
+
+        function RegisterUser($username, $password, $gender, $role){
+            $sql = "CALL SP_REGISTER_USER('$username','$password','$gender','$role')";
+            $array = array();
+            if ($query = $this->connection->connection->query($sql)) {
+                if($row = mysqli_fetch_array($query)){
+                    return $id = trim($row[0]);
+                }
+                $this->connection->close();
+            }
+        }
     }
 
     
