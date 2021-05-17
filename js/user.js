@@ -164,7 +164,6 @@ function RegisterUser(){
             role: role
         }
     }).done(function(resp){
-        alert(resp);
         if(resp>0){
             if(resp==1){
                 $("#register_modal").modal('hide');
