@@ -96,8 +96,8 @@
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-primary" onclick="RegisterUser()">Registrar</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <button class="btn btn-primary" onclick="RegisterUser()"><i class="fa fa-check"></i> Registrar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
         </div>
 
       </div>
