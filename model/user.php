@@ -66,6 +66,15 @@
                 return 0;
             }
         }
+
+        function UpdateUser($user_id, $gender, $role){
+            $sql = "CALL SP_UPDATE_USER('$user_id','$gender','$role')";
+            if ($query = $this->connection->connection->query($sql)) {
+                return 1;
+            }else{
+                return 0;
+            }
+        }
     }
 
     

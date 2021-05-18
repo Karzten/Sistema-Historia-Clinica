@@ -92,7 +92,7 @@ function ListUser(){
                }
              }
            },  
-           {"defaultContent":"<button style='font-size:13px;' type='button' class='desactivate btn btn-danger'><i class='fa fa-trash'></i>&nbsp;<button style='font-size:13px;' type='button' class='activate btn btn-success'><i class='fa fa-check'></i>"}
+           {"defaultContent":"<button style='font-size:13px;' type='button' class='edit btn btn-primary'><i class='fa fa-edit'></i>&nbsp;<button style='font-size:13px;' type='button' class='desactivate btn btn-danger'><i class='fa fa-trash'></i>&nbsp;<button style='font-size:13px;' type='button' class='activate btn btn-success'><i class='fa fa-check'></i>"}
        ],
 
        "language":idioma_espanol,
@@ -109,6 +109,20 @@ function ListUser(){
         filterColumn( $(this).parents('tr').attr('data-column') );
     });
 }
+
+$('#user_table').on('click', '.edit', function(){
+    var data = table.row($(this).parents('tr')).data();
+    if(table.row(this).child.isShown()){
+        var data = table.row(this).data();
+    }
+    $("#edit_modal").modal({backdrop:'static', keyboard:false});
+    $("#edit_modal").modal('show');
+
+    $("#user_id").val(data.user_id);
+    $("#txtUsernameEdit").val(data.username);
+    $("#cbxGenderEdit").val(data.gender).trigger("change");
+    $("#cbxRoleEdit").val(data.role_id).trigger("change");
+})
 
 $('#user_table').on('click', '.desactivate', function(){
     var data = table.row($(this).parents('tr')).data();
@@ -199,6 +213,7 @@ function ListComboRole(){
                 chain+="<option value='"+data[i][0]+"'>"+data[i][1]+"</option>";
             }
             $("#cbxRole").html(chain);
+            $("#cbxRoleEdit").html(chain);
         }else{
             chain+="<option value=''>NO SE ENCONTRARON DATOS</option>";
         }
@@ -243,6 +258,36 @@ function RegisterUser(){
             }
         }else{
             Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar el registro", "error");
+        }
+    })
+}
+
+function UpdateUser(){
+    var user_id = $("#user_id").val();
+    var gender = $("#cbxGenderEdit").val();
+    var role = $("#cbxRoleEdit").val();
+
+    if(user_id.length==0 || gender.length==0 || role.length==0){
+        return Swal.fire("Mensaje de Advertencia", "Llene los campos vacíos", "warning");
+    }
+    
+    $.ajax({
+        "url":"../controller/user/update_user.php",
+        type: 'POST',
+        data:{
+            user_id:user_id,
+            gender: gender,
+            role: role
+        }
+    }).done(function(resp){
+        if(resp>0){
+            $("#edit_modal").modal('hide');
+            Swal.fire("Mensaje de Confirmación", "Datos actualizados correctamente", "success")
+            .then((value)=>{
+                table.ajax.reload();
+            });
+        }else{
+            Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo editar el usuario", "error");
         }
     })
 }

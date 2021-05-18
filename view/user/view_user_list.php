@@ -105,6 +105,52 @@
   </div>
 </form>
 
+<form action="" autocomplete="false" onsubmit="return false">
+  <div class="modal fade" id="edit_modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Editar usuario</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="col-lg-12">
+            <input type="text" id="user_id" hidden>
+            <label for="">Usuario</label>
+            <input type="text" class="form-control" id="txtUsernameEdit" placeholder="Ingrese nombre de usuario" disabled><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Sexo</label>
+            <select class="js-example-basic-single" name="state" id="cbxGenderEdit" style="width:100%;">
+              <option value="MASCULINO">MASCULINO</option>
+              <option value="FEMENINO">FEMENINO</option>
+            </select><br><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Rol</label>
+            <select class="js-example-basic-single" name="state" id="cbxRoleEdit" style="width:100%;">
+
+            </select><br><br>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="UpdateUser()"><i class="fa fa-check"></i> Editar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+
+
 
 <script>
 $(document).ready(function() {
