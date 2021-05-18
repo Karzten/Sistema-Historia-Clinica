@@ -57,6 +57,15 @@
                 $this->connection->close();
             }
         }
+
+        function UpdateStatus($user_id, $status){
+            $sql = "CALL SP_UPDATE_USER_STATUS('$user_id','$status')";
+            if ($query = $this->connection->connection->query($sql)) {
+                return 1;
+            }else{
+                return 0;
+            }
+        }
     }
 
     

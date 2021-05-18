@@ -92,7 +92,7 @@ function ListUser(){
                }
              }
            },  
-           {"defaultContent":"<button style='font-size:13px;' type='button' class='editar btn btn-primary'><i class='fa fa-edit'></i>"}
+           {"defaultContent":"<button style='font-size:13px;' type='button' class='desactivate btn btn-danger'><i class='fa fa-trash'></i>&nbsp;<button style='font-size:13px;' type='button' class='activate btn btn-success'><i class='fa fa-check'></i>"}
        ],
 
        "language":idioma_espanol,
@@ -108,6 +108,72 @@ function ListUser(){
     $('input.column_filter').on( 'keyup click', function () {
         filterColumn( $(this).parents('tr').attr('data-column') );
     });
+}
+
+$('#user_table').on('click', '.desactivate', function(){
+    var data = table.row($(this).parents('tr')).data();
+    if(table.row(this).child.isShown()){
+        var data = table.row(this).data();
+    }
+
+    Swal.fire({
+        title: '¿Está seguro que desea desactivar el usuario?',
+        text: "Una vez hecho, el usuario no tendrá acceso al sistema",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, desactivarlo'
+    }).then((result) => {
+        if (result.value) {
+            UpdateStatus(data.user_id, 'INACTIVO');
+        }
+    })
+})
+
+$('#user_table').on('click', '.activate', function(){
+    var data = table.row($(this).parents('tr')).data();
+    if(table.row(this).child.isShown()){
+        var data = table.row(this).data();
+    }
+
+    Swal.fire({
+        title: '¿Está seguro que desea activar el usuario?',
+        text: "Una vez hecho, el usuario tendrá acceso al sistema",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, activarlo'
+    }).then((result) => {
+        if (result.value) {
+            UpdateStatus(data.user_id, 'ACTIVO');
+        }
+    })
+})
+
+function UpdateStatus(user_id, status){
+    var message = "";
+    if(status=='ACTIVO'){
+        message="activó";
+    }else{
+        message="desactivó"
+    }
+    $.ajax({
+        "url": "../controller/user/update_status.php",
+        type: 'POST',
+        data:{
+            user_id:user_id,
+            status:status
+        }
+    }).done(function(resp){
+        if(resp>0){
+            Swal.fire("Mensaje de Confirmación", "El usuario se "+message+" con éxito", "success")
+            .then((value)=>{
+                table.ajax.reload();
+            });
+        }
+    })
 }
 
 function filterGlobal() {
@@ -171,7 +237,7 @@ function RegisterUser(){
                 .then((value)=>{
                     CleanRegister();
                     table.ajax.reload();
-                });;
+                });
             }else{
                 Swal.fire("Mensaje de Advertencia", "Lo sentimos, el nombre de usuario no se encuentra disponible", "warning");
             }
