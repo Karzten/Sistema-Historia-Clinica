@@ -285,6 +285,7 @@ function UpdateUser(){
             Swal.fire("Mensaje de Confirmación", "Datos actualizados correctamente", "success")
             .then((value)=>{
                 table.ajax.reload();
+                DataUser();
             });
         }else{
             Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo editar el usuario", "error");
@@ -296,4 +297,28 @@ function CleanRegister(){
     $("#txtUsername").val("");
     $("#txtPassword").val("");
     $("#txtConfirmation").val("");
+}
+
+function DataUser(){
+    var user = $("#main_user").val();
+    $.ajax({
+        "url":"../controller/user/data_user.php",
+        type: 'POST',
+        data:{
+            user: user
+        }
+    }).done(function(resp){
+        var data = JSON.parse(resp);
+        if(data.length>0){
+            if(data[0][3]=='MASCULINO'){
+                $("#img_nav").attr("src", "../assets/dist/img/avatar5.png");
+                $("#img_subnav").attr("src", "../assets/dist/img/avatar5.png");
+                $("#img_side").attr("src", "../assets/dist/img/avatar5.png");
+            }else{
+                $("#img_nav").attr("src", "../assets/dist/img/avatar3.png");
+                $("#img_subnav").attr("src", "../assets/dist/img/avatar3.png");
+                $("#img_side").attr("src", "../assets/dist/img/avatar3.png");
+            }
+        }
+    })
 }

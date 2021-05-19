@@ -75,6 +75,18 @@
                 return 0;
             }
         }
+
+        function DataUser($username){
+            $sql = "CALL SP_VERIFY_USER('$username')";
+            $array = array();
+            if ($query = $this->connection->connection->query($sql)){
+                while ($query_VU = mysqli_fetch_array($query)) {
+                    $array[] = $query_VU;
+                }
+                return $array;
+                $this->connection->close();
+            }
+        }
     }
 
     
