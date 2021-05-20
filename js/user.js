@@ -310,6 +310,7 @@ function DataUser(){
     }).done(function(resp){
         var data = JSON.parse(resp);
         if(data.length>0){
+            $('#password_database').val(data[0][2]);
             if(data[0][3]=='MASCULINO'){
                 $("#img_nav").attr("src", "../assets/dist/img/avatar5.png");
                 $("#img_subnav").attr("src", "../assets/dist/img/avatar5.png");
@@ -321,4 +322,61 @@ function DataUser(){
             }
         }
     })
+}
+
+function OpenChangePasswordModal(){
+    $("#password_modal").modal({backdrop: 'static', keyboard: false});
+    $("#password_modal").modal('show');
+    $("#password_modal").on('shown.bs.modal', function(){
+        $("#txtCurrentPassword").focus();
+    })
+}
+
+function UpdatePassword(){
+    var user_id = $("#main_id").val();
+    var password_database = $("#password_database").val();
+    var current_password = $("#txtCurrentPassword").val();
+    var new_password = $("#txtNewPassword").val();
+    var new_confirm = $("#txtNewConfirm").val();
+
+    if(current_password.length==0 || new_password.length==0 || new_confirm.length==0){
+        Swal.fire("Mensaje de Advertencia","Llene los campos vacíos", "warning");
+    }
+
+    if(new_password != new_confirm){
+        Swal.fire("Mensaje de Advertencia","Las contraeñas no coinciden, ingresa la misma clave dos veces para confirmarla", "warning");
+    }
+
+    $.ajax({
+        url: '../controller/user/update_password.php',
+        type: 'POST',
+        data: {
+            user_id : user_id,
+            password_database : password_database,
+            current_password : current_password,
+            new_password : new_password
+        }
+    }).done(function(resp){
+        alert(resp);
+        if(resp>0){
+            if(resp==1){
+                $("#password_modal").modal("hide");
+                CleanUpdatePassword();
+                Swal.fire("Mensaje de Confirmación", "Contraseña actualizada correctamente", "success")
+                .then((value)=>{
+                    DataUser();
+                });
+            }else{
+                Swal.fire("Mensaje de error","Contraeña actual incorrecta","error");
+            }
+        }else{
+            Swal.fire("Mensaje de error","No se pudo actualizar la contraseña","error");
+        }
+    })
+}
+
+function CleanUpdatePassword(){
+    $("#txtCurrentPassword").val("");
+    $("#txtNewPassword").val("");
+    $("#txtNewConfirm").val("");
 }

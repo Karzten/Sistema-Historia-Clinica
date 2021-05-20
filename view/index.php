@@ -212,7 +212,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Configurar cuenta</a>
+                  <a href="#" class="btn btn-default btn-flat" onclick="OpenChangePasswordModal()">Cambiar contraseña</a>
                 </div>
                 <div class="pull-right">
                   <a href="./../controller/user/close_session.php" class="btn btn-default btn-flat">Salir</a>
@@ -502,6 +502,45 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+
+<form action="" autocomplete="false" onsubmit="return false">
+  <div class="modal fade" id="password_modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modificar contraseña</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="col-lg-12">
+            <input type="text" id="password_database" hidden>
+            <label for="">Contraseña actual</label>
+            <input type="password" class="form-control" id="txtCurrentPassword" placeholder="Ingrese contraseña actual"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Nueva contraseña</label>
+            <input type="password" class="form-control" id="txtNewPassword" placeholder="Ingrese nueva contraseña"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Repetir contraseña</label>
+            <input type="password" class="form-control" id="txtNewConfirm" placeholder="Repetir contraseña"><br>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="UpdatePassword()"><i class="fa fa-check"></i> Guardar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
 
 <!-- jQuery 3 -->
 <script src="../assets/bower_components/jquery/dist/jquery.min.js"></script>

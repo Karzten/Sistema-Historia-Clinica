@@ -141,7 +141,7 @@
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-primary" onclick="UpdateUser()"><i class="fa fa-check"></i> Editar</button>
+          <button class="btn btn-primary" onclick="UpdateUser()"><i class="fa fa-check"></i> Guardar</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
         </div>
 
@@ -149,8 +149,6 @@
     </div>
   </div>
 </form>
-
-
 
 <script>
 $(document).ready(function() {

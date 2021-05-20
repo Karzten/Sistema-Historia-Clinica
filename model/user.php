@@ -76,6 +76,15 @@
             }
         }
 
+        function UpdatePassword($user_id, $new_password){
+            $sql = "CALL SP_UPDATE_PASSWORD('$user_id','$new_password')";
+            if ($query = $this->connection->connection->query($sql)) {
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+
         function DataUser($username){
             $sql = "CALL SP_VERIFY_USER('$username')";
             $array = array();
