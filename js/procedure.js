@@ -1,3 +1,5 @@
+var procedure_table;
+
 function ListProcedure(){
     procedure_table = $("#procedure_table").DataTable({
        "ordering":false,
@@ -81,6 +83,54 @@ function RegisterProcedure(){
             }else{
                 Swal.fire("Mensaje de Advertencia", "El procedimiento médico ya existe", "warning");
             }
+        }
+    })
+}
+
+$('#procedure_table').on('click', '.edit', function(){
+    var data = procedure_table.row($(this).parents('tr')).data();
+    if(procedure_table.row(this).child.isShown()){
+        var data = procedure_table.row(this).data();
+    }
+    $("#edit_modal").modal({backdrop:'static', keyboard:false});
+    $("#edit_modal").modal('show');
+
+    $("#procedure_id").val(data.procedure_id);
+    $("#txtCurrentNameEdit").val(data.name);
+    $("#txtNewNameEdit").val(data.name);
+    $("#cbxStatusEdit").val(data.status).trigger("change");
+})
+
+function UpdateProcedure(){
+    var procedure_id = $("#procedure_id").val();
+    var new_procedure = $("#txtNewNameEdit").val();
+    var current_procedure = $("#txtCurrentNameEdit").val();
+    var status = $("#cbxStatusEdit").val();
+
+    if(new_procedure.length == "0"){
+        Swal.fire("Mensaje de Advertencia", "Debe ingresar un procedimiento médico", "warning");
+    }
+
+    $.ajax({
+        url: '../controller/procedure/update_procedure.php',
+        type: 'POST', 
+        data: {
+            procedure_id : procedure_id,
+            new_procedure : new_procedure,
+            current_procedure : current_procedure,
+            status : status
+        }
+    }).done(function(resp){
+        if(resp>0){
+            $("#edit_modal").modal('hide');
+            if(resp==1){
+                ListProcedure();
+                Swal.fire("Mensaje de Confirmación", "Datos actualizados correctamente", "success");
+            }else{
+                Swal.fire("Mensaje de Advertencia", "Lo sentimos. El procedimiento ya existe.", "warning");
+            }
+        }else{
+            Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar la actualización de datos.", "error");
         }
     })
 }

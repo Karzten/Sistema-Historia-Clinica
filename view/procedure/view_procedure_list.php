@@ -85,6 +85,44 @@
     </div>
 </div>
 
+<div class="modal fade" id="edit_modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Editar Procedimiento Médico</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="col-lg-12">
+            <input type="text" id="procedure_id" hidden>
+            <label for="">Nombre</label>
+            <input type="text" id="txtCurrentNameEdit" hidden><br>
+            <input type="text" class="form-control" id="txtNewNameEdit" placeholder="Ingrese nombre del procedimiento"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Estado</label>
+            <select class="js-example-basic-single" name="state" id="cbxStatusEdit" style="width:100%;">
+              <option value="ACTIVO">ACTIVO</option>
+              <option value="INACTIVO">INACTIVO</option>
+            </select><br><br>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="UpdateProcedure()"><i class="fa fa-check"></i> Guardar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+</div>
+
+
 <script>
 $(document).ready(function() {
     ListProcedure();

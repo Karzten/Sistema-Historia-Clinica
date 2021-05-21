@@ -31,6 +31,18 @@
             }
         }
 
+        function UpdateProcedure($procedure_id, $current_procedure, $new_procedure, $status){
+            $sql = "CALL SP_UPDATE_PROCEDURE('$procedure_id', '$current_procedure', '$new_procedure','$status')";
+            $array = array();
+            if ($query = $this->connection->connection->query($sql)) {
+                if($row = mysqli_fetch_array($query)){
+                    return $id = trim($row[0]);
+                }
+                $this->connection->close();
+            }
+        }
+
+
     }
 
     
