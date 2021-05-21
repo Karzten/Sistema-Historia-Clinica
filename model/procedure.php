@@ -20,6 +20,17 @@
             }
         }
 
+        function RegisterProcedure($name, $status){
+            $sql = "CALL SP_REGISTER_PROCEDURE('$name','$status')";
+            $array = array();
+            if ($query = $this->connection->connection->query($sql)) {
+                if($row = mysqli_fetch_array($query)){
+                    return $id = trim($row[0]);
+                }
+                $this->connection->close();
+            }
+        }
+
     }
 
     

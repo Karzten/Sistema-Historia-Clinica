@@ -1,5 +1,3 @@
-
-
 function ListProcedure(){
     procedure_table = $("#procedure_table").DataTable({
        "ordering":false,
@@ -51,4 +49,38 @@ function ListProcedure(){
         cell.innerHTML = i + 1 + PageInfo.start;
     } );
     } );
+}
+
+function OpenModalRegister(){
+    $("#register_modal").modal({backdrop: 'static', keyboard: false});
+    $("#register_modal").modal('show');
+}
+
+function RegisterProcedure(){
+    var name = $("#txtName").val();
+    var status = $("#cbxStatus").val();
+
+    if(name.length == 0){
+        Swal.fire("Mensaje de Advertencia", "Llenar los campos vacíos", "warning");
+    }
+
+    $.ajax({
+        url:'../controller/procedure/register_procedure.php',
+        type: 'POST',
+        data: {
+            name: name,
+            status: status
+        }
+    }).done(function(resp){
+        alert(resp);
+        if(resp>0){
+            if(resp==1){
+                $("#register_modal").modal('hide');
+                ListProcedure();
+                Swal.fire("Mensaje de Confirmación", "Datos guardados correctamente", "success");
+            }else{
+                Swal.fire("Mensaje de Advertencia", "El procedimiento médico ya existe", "warning");
+            }
+        }
+    })
 }
