@@ -15,11 +15,26 @@ function VerifyUser(){
         }
     }).done(function(resp){
         if(resp==0){
-            Swal.fire("Mensaje de error", 'Usuario y/o contraseña incorrecta', "error");
+            $.ajax({
+                url: '../controller/user/update_attempt.php',
+                type: 'POST',
+                data: {
+                    username: username
+                }
+            }).done(function(resp){
+                if(resp==2){
+                    Swal.fire("Mensaje de advertencia", "Usuario y/o contraseña incorrecta, intentos fallidos: "+(parseInt(resp)+1)+". Para poder acceder a su cuenta, restablezca su contraseña.","warning");
+                }else{
+                    Swal.fire("Mensaje de advertencia", "Usuario y/o contraseña incorrecta, intentos fallidos: "+(parseInt(resp)+1)+".","warning");
+                }
+            })
         }else{
             var data = JSON.parse(resp);
             if(data[0][5]=='INACTIVO'){
                 return Swal.fire("Mensaje de advertencia", 'Lo sentimos, el usuario '+username+' se encuentra suspendido' , "warning");
+            }
+            if(data[0][7]==2){
+                return Swal.fire("Mensaje de Advertencia", "Su cuenta se encuentra bloqueada, para desbloquear restablezca su contraseña", "warning");
             }
             $.ajax({
                 url: '../controller/user/create_session.php',
