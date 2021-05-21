@@ -1,13 +1,13 @@
-var procedure_table;
+var supply_table;
 
 function filterGlobal() {
-    $('#procedure_table').DataTable().search(
+    $('#supply_table').DataTable().search(
         $('#global_filter').val(),
     ).draw();
 }
 
-function ListProcedure(){
-    procedure_table = $("#procedure_table").DataTable({
+function ListSupply(){
+    supply_table = $("#supply_table").DataTable({
        "ordering":false,
        "paging": false,
        "searching": { "regex": true },
@@ -17,23 +17,28 @@ function ListProcedure(){
        "async": false ,
        "processing": true,
        "ajax":{
-           "url":"../controller/procedure/list_procedure.php",
+           "url":"../controller/supply/list_supply.php",
            type:'POST'
        },
        "order":[[1, 'asc']],
        "columns":[
            {"defaultContent":""},
            {"data":"name"},
+           {"data":"stock"},
            {"data":"register_date"},
            {"data":"status",
            render: function (data, type, row ) {
                if(data=='ACTIVO'){
                    return "<span class='label label-success'>"+data+"</span>";                   
-               }else{
+                }
+               if(data=='INACTIVO'){
                  return "<span class='label label-danger'>"+data+"</span>";                 
-               }
-             }
-           },  
+                }
+               if(data=='AGOTADO'){
+                return "<span class='label label-black' style='background: black;'>"+data+"</span>";                 
+                }
+            }
+            },  
            {"defaultContent":"<button style='font-size:13px;' type='button' class='edit btn btn-primary'><i class='fa fa-edit'></i>"}
        ],
 
@@ -41,7 +46,7 @@ function ListProcedure(){
        select: true
    });
 
-   document.getElementById("procedure_table_filter").style.display="none";
+   document.getElementById("supply_table_filter").style.display="none";
 
     $('input.global_filter').on( 'keyup click', function () {
         filterGlobal();
@@ -51,9 +56,9 @@ function ListProcedure(){
         filterColumn( $(this).parents('tr').attr('data-column') );
     });
 
-    procedure_table.on( 'draw.dt', function () {
-    var PageInfo = $('#procedure_table').DataTable().page.info();
-    procedure_table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+    supply_table.on( 'draw.dt', function () {
+    var PageInfo = $('#supply_table').DataTable().page.info();
+    supply_table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
         cell.innerHTML = i + 1 + PageInfo.start;
     } );
     } );

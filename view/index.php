@@ -269,6 +269,12 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
+          <a onclick="cargar_contenido('contenido_principal','supply/view_supply_list.php')">
+            <i class="fa fa-cubes"></i> <span>Insumos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
         </li>
       </ul>
     </section>
