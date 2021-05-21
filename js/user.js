@@ -96,6 +96,7 @@ function ListUser(){
        "columns":[
            {"data":"numero"},
            {"data":"username"},
+           {"data":"email"},
            {"data":"name"},
            {"data":"gender"},
            {"data":"status",
@@ -135,6 +136,7 @@ $('#user_table').on('click', '.edit', function(){
 
     $("#user_id").val(data.user_id);
     $("#txtUsernameEdit").val(data.username);
+    $("#txtEmailEdit").val(data.email);
     $("#cbxGenderEdit").val(data.gender).trigger("change");
     $("#cbxRoleEdit").val(data.role_id).trigger("change");
 })
@@ -241,13 +243,19 @@ function RegisterUser(){
     var confirmation = $("#txtConfirmation").val();
     var gender = $("#cbxGender").val();
     var role = $("#cbxRole").val();
+    var email = $("#txtEmail").val();
+    var validate = $("#validate_email").val();
 
-    if(username.length==0 || password.length==0 || confirmation.length==0 || gender.length==0 || role.length==0){
+    if(username.length==0 || password.length==0 || confirmation.length==0 || gender.length==0 || role.length==0 || email.length==0){
         return Swal.fire("Mensaje de Advertencia", "Llene los campos vacíos", "warning");
     }
 
     if(password != confirmation){
         return Swal.fire("Mensaje de Advertencia", "Las contraseñas no coinciden", "warning");
+    }
+
+    if(validate=="Incorrecto"){
+        return Swal.fire("Mensaje de Advertencia", "El formato de email es inválido, ingrese un formato válido", "warning");
     }
 
     $.ajax({
@@ -257,7 +265,8 @@ function RegisterUser(){
             username:username,
             password:password,
             gender: gender,
-            role: role
+            role: role,
+            email: email
         }
     }).done(function(resp){
         if(resp>0){
@@ -281,9 +290,15 @@ function UpdateUser(){
     var user_id = $("#user_id").val();
     var gender = $("#cbxGenderEdit").val();
     var role = $("#cbxRoleEdit").val();
+    var email = $("#txtEmailEdit").val();
+    var validate = $("#validate_email_edit").val();
 
-    if(user_id.length==0 || gender.length==0 || role.length==0){
+    if(user_id.length==0 || gender.length==0 || role.length==0 || email.length==0){
         return Swal.fire("Mensaje de Advertencia", "Llene los campos vacíos", "warning");
+    }
+
+    if(validate=="Incorrecto"){
+        return Swal.fire("Mensaje de Advertencia", "El formato de email es inválido, ingrese un formato válido", "warning");
     }
     
     $.ajax({
@@ -292,7 +307,8 @@ function UpdateUser(){
         data:{
             user_id:user_id,
             gender: gender,
-            role: role
+            role: role,
+            email: email
         }
     }).done(function(resp){
         if(resp>0){

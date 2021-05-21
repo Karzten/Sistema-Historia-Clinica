@@ -47,8 +47,8 @@
             }
         }
 
-        function RegisterUser($username, $password, $gender, $role){
-            $sql = "CALL SP_REGISTER_USER('$username','$password','$gender','$role')";
+        function RegisterUser($username, $password, $gender, $role, $email){
+            $sql = "CALL SP_REGISTER_USER('$username','$password','$gender','$role', '$email')";
             $array = array();
             if ($query = $this->connection->connection->query($sql)) {
                 if($row = mysqli_fetch_array($query)){
@@ -67,8 +67,8 @@
             }
         }
 
-        function UpdateUser($user_id, $gender, $role){
-            $sql = "CALL SP_UPDATE_USER('$user_id','$gender','$role')";
+        function UpdateUser($user_id, $gender, $role, $email){
+            $sql = "CALL SP_UPDATE_USER('$user_id','$gender','$role', '$email')";
             if ($query = $this->connection->connection->query($sql)) {
                 return 1;
             }else{

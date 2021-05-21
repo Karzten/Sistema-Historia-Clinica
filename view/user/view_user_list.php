@@ -28,6 +28,7 @@
                   <tr>
                     <th>#</th>
                     <th>Usuario</th>
+                    <th>Correo</th>
                     <th>Rol</th>
                     <th>Sexo</th>
                     <th>Estado</th>
@@ -38,6 +39,7 @@
                   <tr>
                     <th>#</th>
                     <th>Usuario</th>
+                    <th>Correo</th>
                     <th>Rol</th>
                     <th>Sexo</th>
                     <th>Estado</th>
@@ -66,6 +68,13 @@
           <div class="col-lg-12">
             <label for="">Usuario</label>
             <input type="text" class="form-control" id="txtUsername" placeholder="Ingrese nombre de usuario"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Correo electrónico</label>
+            <input type="text" class="form-control" id="txtEmail" placeholder="Ingrese correo">
+            <label for="" id="lblEmail" style="color: red;"></label>
+            <input type="text" id="validate_email" hidden>
           </div>
 
           <div class="col-lg-12">
@@ -124,6 +133,13 @@
           </div>
 
           <div class="col-lg-12">
+            <label for="">Correo electrónico</label>
+            <input type="text" class="form-control" id="txtEmailEdit" placeholder="Ingrese correo">
+            <label for="" id="lblEmailEdit" style="color: red;"></label>
+            <input type="text" id="validate_email_edit" hidden>
+          </div>
+
+          <div class="col-lg-12">
             <label for="">Sexo</label>
             <select class="js-example-basic-single" name="state" id="cbxGenderEdit" style="width:100%;">
               <option value="MASCULINO">MASCULINO</option>
@@ -159,4 +175,32 @@ $(document).ready(function() {
     $("#txtUsername").focus();
   })
 } );
+
+document.getElementById('txtEmail').addEventListener('input', function() {
+    campo = event.target;
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    if(emailRegex.test(campo.value)){
+      $(this).css("border","");
+      $("#lblEmail").html("");
+      $("#validate_email").val("Correcto");
+    }else{
+      $(this).css("border", "1px solid red");
+      $("#lblEmail").html("Correo incorrecto");
+      $("#validate_email").val("Incorrecto");
+    }
+});
+
+document.getElementById('txtEmailEdit').addEventListener('input', function() {
+    campo = event.target;
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    if(emailRegex.test(campo.value)){
+      $(this).css("border","");
+      $("#lblEmailEdit").html("");
+      $("#validate_email_edit").val("Correcto");
+    }else{
+      $(this).css("border", "1px solid red");
+      $("#lblEmailEdit").html("Correo incorrecto");
+      $("#validate_email_edit").val("Incorrecto");
+    }
+});
 </script>
