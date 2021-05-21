@@ -55,7 +55,7 @@
 					</div>
 					
 					<div class="text-right p-t-8 p-b-31">
-						<a href="#">
+						<a href="#" onclick="OpenRestoreModal()">
 							¿Olvidaste la contraseña?
 						</a>
 					</div>
@@ -88,6 +88,35 @@
 	
 
 	<div id="dropDownSelect1"></div>
+
+<form action="" autocomplete="false" onsubmit="return false">
+  <div class="modal fade" id="restore_modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header" style="text-align: left;">
+          <h4 class="modal-title">Restablecer contraseña</h4>
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="col-lg-12">
+            <label for=""><b>Ingrese el correo registrado en el usuario para enviarle su contraseña restablecida</b></label>
+            <input type="text" class="form-control" id="txtEmail" placeholder="Ingrese el correo"><br>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="RestorePassword()"><i class="fa fa-check"></i> Enviar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
 
 <!--===============================================================================================-->
 	<script src="vendor/sweetalert2/sweetalert2.js"></script>

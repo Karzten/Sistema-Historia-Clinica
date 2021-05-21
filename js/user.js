@@ -380,3 +380,41 @@ function CleanUpdatePassword(){
     $("#txtNewPassword").val("");
     $("#txtNewConfirm").val("");
 }
+
+function OpenRestoreModal(){
+    $("#restore_modal").modal({backdrop: 'static', keyboard: false});
+    $("#restore_modal").modal('show');
+    $("#restore_modal").on('shown.bs.modal', function(){
+        $("#txtEmail").focus();
+    })
+}
+
+function RestorePassword(){
+    var email = $("#txtEmail").val();
+    if(email.length==0){
+        return Swal.fire("Mensaje de advertencia", "Llene los campos en blanco", "warning");
+    }
+    var characters = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ23456789";
+    var password = "";
+    for(var i=0;i<6;i++){
+        password+=characters.charAt(Math.floor(Math.random()*characters.length));
+    }
+    $.ajax({
+        url: "../controller/user/restore_password.php",
+        type: 'POST',
+        data: {
+            email: email,
+            password: password
+        }
+    }).done(function(resp){
+        if(resp>0){
+            if(resp==1){
+                Swal.fire("Mensaje de Confirmación", "Su contraseña fue restalecida con éxito al correo: "+email, "success");
+            }else{
+                Swal.fire("Mensaje de Advertencia", "El correo ingresado no se encuentra registrado", "warning");
+            }
+        }else{
+            Swal.fire("Mensaje de Error", "No se pudo restablecer su contraseña", "error");
+        }
+    })
+}
