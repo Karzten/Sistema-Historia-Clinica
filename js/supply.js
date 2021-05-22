@@ -132,33 +132,35 @@ $('#supply_table').on('click', '.edit', function(){
     $("#cbxStatusEdit").val(data.status).trigger("change");
 })
 
-function UpdateProcedure(){
-    var procedure_id = $("#procedure_id").val();
-    var new_procedure = $("#txtNewNameEdit").val();
-    var current_procedure = $("#txtCurrentNameEdit").val();
+function UpdateSupply(){
+    var supply_id = $("#supply_id").val();
+    var new_supply = $("#txtNewNameEdit").val();
+    var current_supply = $("#txtCurrentNameEdit").val();
+    var stock = $("#txtStockEdit").val();
     var status = $("#cbxStatusEdit").val();
 
-    if(new_procedure.length == "0"){
-        Swal.fire("Mensaje de Advertencia", "Debe ingresar un procedimiento médico", "warning");
+    if(new_supply.length == "0"){
+        Swal.fire("Mensaje de Advertencia", "Debe ingresar el nombre del insumo", "warning");
     }
 
     $.ajax({
-        url: '../controller/procedure/update_procedure.php',
+        url: '../controller/supply/update_supply.php',
         type: 'POST', 
         data: {
-            procedure_id : procedure_id,
-            new_procedure : new_procedure,
-            current_procedure : current_procedure,
+            supply_id : supply_id,
+            new_supply : new_supply,
+            current_supply : current_supply,
+            stock : stock,
             status : status
         }
     }).done(function(resp){
         if(resp>0){
             $("#edit_modal").modal('hide');
             if(resp==1){
-                ListProcedure();
+                ListSupply();
                 Swal.fire("Mensaje de Confirmación", "Datos actualizados correctamente", "success");
             }else{
-                Swal.fire("Mensaje de Advertencia", "Lo sentimos. El procedimiento ya existe.", "warning");
+                Swal.fire("Mensaje de Advertencia", "Lo sentimos. El insumo ya existe.", "warning");
             }
         }else{
             Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar la actualización de datos.", "error");

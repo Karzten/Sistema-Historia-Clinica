@@ -98,16 +98,21 @@
 
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Editar Procedimiento Médico</h4>
+          <h4 class="modal-title">Editar Insumos</h4>
         </div>
 
         <div class="modal-body">
 
           <div class="col-lg-12">
-            <input type="text" id="procedure_id" hidden>
+            <input type="text" id="supply_id" hidden>
             <label for="">Nombre</label>
-            <input type="text" id="txtCurrentNameEdit" hidden><br>
-            <input type="text" class="form-control" id="txtNewNameEdit" placeholder="Ingrese nombre del procedimiento"><br>
+            <input type="text" id="txtCurrentNameEdit" onkeypress="return soloLetras(event)" hidden><br>
+            <input type="text" class="form-control" id="txtNewNameEdit" placeholder="Ingrese el nombre del insumo" onkeypress="return soloLetras(event)"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Stock</label>
+            <input type="text" class="form-control" id="txtStockEdit" placeholder="Ingrese stock del insumo" maxlength="5" onkeypress="return soloNumeros(event)"><br>
           </div>
 
           <div class="col-lg-12">
@@ -115,19 +120,23 @@
             <select class="js-example-basic-single" name="state" id="cbxStatusEdit" style="width:100%;">
               <option value="ACTIVO">ACTIVO</option>
               <option value="INACTIVO">INACTIVO</option>
+              <option value="AGOTADO">AGOTADO</option>
             </select><br><br>
           </div>
 
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-primary" onclick="UpdateProcedure()"><i class="fa fa-check"></i> Guardar</button>
+          <button class="btn btn-primary" onclick="UpdateSupply()"><i class="fa fa-check"></i> Guardar</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
         </div>
 
       </div>
     </div>
 </div>
+
+
+
 
 
 <script>

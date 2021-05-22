@@ -30,5 +30,16 @@
                 $this->connection->close();
             }
         }
+
+        function UpdateSupply($supply_id, $current_supply, $new_supply, $stock, $status){
+            $sql = "CALL SP_UPDATE_SUPPLY('$supply_id', '$current_supply', '$new_supply', '$stock','$status')";
+            $array = array();
+            if ($query = $this->connection->connection->query($sql)) {
+                if($row = mysqli_fetch_array($query)){
+                    return $id = trim($row[0]);
+                }
+                $this->connection->close();
+            }
+        }
     }
 ?>
