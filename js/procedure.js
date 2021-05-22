@@ -114,10 +114,6 @@ $('#procedure_table').on('click', '.edit', function(){
     $("#cbxStatusEdit").val(data.status).trigger("change");
 })
 
-function CleanEdit(){
-    $("#txtNameEdit").val("");
-}
-
 function UpdateProcedure(){
     var procedure_id = $("#procedure_id").val();
     var new_procedure = $("#txtNewNameEdit").val();
@@ -142,10 +138,8 @@ function UpdateProcedure(){
             $("#edit_modal").modal('hide');
             if(resp==1){
                 ListProcedure();
-                CleanEdit();
                 Swal.fire("Mensaje de Confirmación", "Datos actualizados correctamente", "success");
             }else{
-                CleanEdit();
                 Swal.fire("Mensaje de Advertencia", "Lo sentimos. El procedimiento ya existe.", "warning");
             }
         }else{
