@@ -84,12 +84,20 @@ function RegisterProcedure(){
             if(resp==1){
                 $("#register_modal").modal('hide');
                 ListProcedure();
+                CleanRegister();
                 Swal.fire("Mensaje de Confirmación", "Datos guardados correctamente", "success");
             }else{
+                CleanRegister();
                 Swal.fire("Mensaje de Advertencia", "El procedimiento médico ya existe", "warning");
             }
+        }else{
+            Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar el registro", "error");
         }
     })
+}
+
+function CleanRegister(){
+    $("#txtName").val("");
 }
 
 $('#procedure_table').on('click', '.edit', function(){
@@ -105,6 +113,10 @@ $('#procedure_table').on('click', '.edit', function(){
     $("#txtNewNameEdit").val(data.name);
     $("#cbxStatusEdit").val(data.status).trigger("change");
 })
+
+function CleanEdit(){
+    $("#txtNameEdit").val("");
+}
 
 function UpdateProcedure(){
     var procedure_id = $("#procedure_id").val();
@@ -130,8 +142,10 @@ function UpdateProcedure(){
             $("#edit_modal").modal('hide');
             if(resp==1){
                 ListProcedure();
+                CleanEdit();
                 Swal.fire("Mensaje de Confirmación", "Datos actualizados correctamente", "success");
             }else{
+                CleanEdit();
                 Swal.fire("Mensaje de Advertencia", "Lo sentimos. El procedimiento ya existe.", "warning");
             }
         }else{
