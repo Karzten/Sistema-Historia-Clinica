@@ -116,3 +116,64 @@ function RegisterMedicine(){
     })
 }
 
+$('#medicine_table').on('click', '.edit', function(){
+    var data = medicine_table.row($(this).parents('tr')).data();
+    if(medicine_table.row(this).child.isShown()){
+        var data = medicine_table.row(this).data();
+    }
+    $("#edit_modal").modal({backdrop:'static', keyboard:false});
+    $("#edit_modal").modal('show');
+
+    $("#medicine_id").val(data.medicine_id);
+    $("#txtCurrentNameEdit").val(data.name);
+    $("#txtNewNameEdit").val(data.name);
+    $("#txtAliasEdit").val(data.alias);
+    $("#txtStockEdit").val(data.stock);
+    $("#cbxStatusEdit").val(data.status).trigger("change");
+})
+
+function UpdateMedicine(){
+    var medicine_id = $("#medicine_id").val();
+    var new_medicine = $("#txtNewNameEdit").val();
+    var current_medicine = $("#txtCurrentNameEdit").val();
+    var alias = $("#txtAliasEdit").val();
+    var stock = $("#txtStockEdit").val();
+    var status = $("#cbxStatusEdit").val();
+
+    if(new_medicine.length == 0){
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el nombre del medicamento", "warning");
+    }
+
+    if(alias.length == 0){
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el alias del medicamento", "warning");
+    }
+
+    if(stock.length == 0){
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el stock del medicamento", "warning");
+    }
+
+    $.ajax({
+        url: '../controller/medicine/update_medicine.php',
+        type: 'POST', 
+        data: {
+            medicine_id : medicine_id,
+            new_medicine : new_medicine,
+            current_medicine : current_medicine,
+            alias: alias,
+            stock : stock,
+            status : status
+        }
+    }).done(function(resp){
+        if(resp>0){
+            $("#edit_modal").modal('hide');
+            if(resp==1){
+                ListMedicine();
+                Swal.fire("Mensaje de Confirmación", "Datos actualizados correctamente", "success");
+            }else{
+                Swal.fire("Mensaje de Advertencia", "Lo sentimos. El medicamento ya existe.", "warning");
+            }
+        }else{
+            Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar la actualización de datos.", "error");
+        }
+    })
+}

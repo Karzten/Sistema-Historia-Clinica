@@ -31,8 +31,8 @@
             }
         }
 
-        function UpdateMedicine($procedure_id, $current_procedure, $new_procedure, $status){
-            $sql = "CALL SP_UPDATE_MEDICINE('$procedure_id', '$current_procedure', '$new_procedure','$status')";
+        function UpdateMedicine($medicine_id, $current_medicine, $new_medicine, $alias, $stock, $status){
+            $sql = "CALL SP_UPDATE_MEDICINE('$medicine_id', '$current_medicine', '$new_medicine', '$alias','$stock', '$status')";
             $array = array();
             if ($query = $this->connection->connection->query($sql)) {
                 if($row = mysqli_fetch_array($query)){

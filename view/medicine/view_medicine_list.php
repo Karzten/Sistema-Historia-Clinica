@@ -99,6 +99,54 @@
     </div>
 </div>
 
+<div class="modal fade" id="edit_modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Editar Medicamentos</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="col-lg-12">
+            <label for="">Nombre</label>
+            <input type="text" id="medicine_id" hidden>
+            <input type="text" id="txtCurrentNameEdit" hidden><br>
+            <input type="text" class="form-control" id="txtNewNameEdit" placeholder="Ingrese el nombre del medicamento"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Alias</label>
+            <input type="text" class="form-control" id="txtAliasEdit" placeholder="Ingrese el alias del medicamento" onkeypress="return soloLetras(event)"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Stock</label>
+            <input type="text" class="form-control" id="txtStockEdit" placeholder="Ingrese stock del medicamento" maxlength="5" onkeypress="return soloNumeros(event)"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Estado</label>
+            <select class="js-example-basic-single" name="state" id="cbxStatusEdit" style="width:100%;">
+              <option value="ACTIVO">ACTIVO</option>
+              <option value="INACTIVO">INACTIVO</option>
+              <option value="AGOTADO">AGOTADO</option>
+            </select><br><br>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="UpdateMedicine()"><i class="fa fa-check"></i> Guardar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+</div>
+
 <script>
 $(document).ready(function() {
     ListMedicine();
