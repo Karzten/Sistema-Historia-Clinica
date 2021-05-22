@@ -69,7 +69,7 @@ function RegisterProcedure(){
     var status = $("#cbxStatus").val();
 
     if(name.length == 0){
-        Swal.fire("Mensaje de Advertencia", "Llenar los campos vacíos", "warning");
+        return Swal.fire("Mensaje de Advertencia", "Llenar los campos vacíos", "warning");
     }
 
     $.ajax({

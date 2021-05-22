@@ -75,16 +75,16 @@ function RegisterSupply(){
     var status = $("#cbxStatus").val();
 
     if(name.length == 0){
-        Swal.fire("Mensaje de Advertencia", "Debe ingresar el nombre del insumo", "warning");
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el nombre del insumo", "warning");
     }
     if(stock.length < 0){
-        Swal.fire("Mensaje de Advertencia", "El stock no puede ser negativo", "warning");
+        return Swal.fire("Mensaje de Advertencia", "El stock no puede ser negativo", "warning");
     }
     if(stock.length==0){
-        Swal.fire("Mensaje de Advertencia", "Debe ingresar el stock del insumo", "warning");
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el stock del insumo", "warning");
     }
     if(cbxStatus.length==0){
-        Swal.fire("Mensaje de Advertencia", "Debe ingresar el estado del insumo", "warning");
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el estado del insumo", "warning");
     }
 
     $.ajax({

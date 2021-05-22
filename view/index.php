@@ -275,6 +275,12 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
+          <a onclick="cargar_contenido('contenido_principal','medicine/view_medicine_list.php')">
+            <i class="fa fa-medkit"></i> <span>Medicamentos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
         </li>
       </ul>
     </section>
