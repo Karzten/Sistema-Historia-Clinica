@@ -69,45 +69,66 @@ function OpenModalRegister(){
     $("#register_modal").modal('show');
 }
 
-function RegisterProcedure(){
+function RegisterSupply(){
     var name = $("#txtName").val();
+    var stock = $("#txtStock").val();
     var status = $("#cbxStatus").val();
 
     if(name.length == 0){
-        Swal.fire("Mensaje de Advertencia", "Llenar los campos vacíos", "warning");
+        Swal.fire("Mensaje de Advertencia", "Debe ingresar el nombre del insumo", "warning");
+    }
+    if(stock.length < 0){
+        Swal.fire("Mensaje de Advertencia", "El stock no puede ser negativo", "warning");
+    }
+    if(stock.length==0){
+        Swal.fire("Mensaje de Advertencia", "Debe ingresar el stock del insumo", "warning");
+    }
+    if(cbxStatus.length==0){
+        Swal.fire("Mensaje de Advertencia", "Debe ingresar el estado del insumo", "warning");
     }
 
     $.ajax({
-        url:'../controller/procedure/register_procedure.php',
+        url:'../controller/supply/register_supply.php',
         type: 'POST',
         data: {
             name: name,
+            stock: stock,
             status: status
         }
     }).done(function(resp){
         if(resp>0){
             if(resp==1){
                 $("#register_modal").modal('hide');
-                ListProcedure();
+                ListSupply();
+                CleanRegister();
                 Swal.fire("Mensaje de Confirmación", "Datos guardados correctamente", "success");
             }else{
-                Swal.fire("Mensaje de Advertencia", "El procedimiento médico ya existe", "warning");
+                CleanRegister();
+                Swal.fire("Mensaje de Advertencia", "El insumo ya existe", "warning");
             }
+        }else{
+            Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar el registro", "error");
         }
     })
 }
 
-$('#procedure_table').on('click', '.edit', function(){
-    var data = procedure_table.row($(this).parents('tr')).data();
-    if(procedure_table.row(this).child.isShown()){
-        var data = procedure_table.row(this).data();
+function CleanRegister(){
+    $("#txtName").val("");
+    $("#txtStock").val("");
+}
+
+$('#supply_table').on('click', '.edit', function(){
+    var data = supply_table.row($(this).parents('tr')).data();
+    if(supply_table.row(this).child.isShown()){
+        var data = supply_table.row(this).data();
     }
     $("#edit_modal").modal({backdrop:'static', keyboard:false});
     $("#edit_modal").modal('show');
 
-    $("#procedure_id").val(data.procedure_id);
+    $("#supply_id").val(data.supply_id);
     $("#txtCurrentNameEdit").val(data.name);
     $("#txtNewNameEdit").val(data.name);
+    $("#txtStockEdit").val(data.stock);
     $("#cbxStatusEdit").val(data.status).trigger("change");
 })
 

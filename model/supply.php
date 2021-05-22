@@ -19,7 +19,16 @@
                 $this->connection->close();
             }
         }
-    }
 
-    
+        function RegisterSupply($name, $stock, $status){
+            $sql = "CALL SP_REGISTER_SUPPLY('$name', '$stock', '$status')";
+            $array = array();
+            if ($query = $this->connection->connection->query($sql)) {
+                if($row = mysqli_fetch_array($query)){
+                    return $id = trim($row[0]);
+                }
+                $this->connection->close();
+            }
+        }
+    }
 ?>

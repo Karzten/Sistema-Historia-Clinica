@@ -58,14 +58,19 @@
 
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Registro de Procedimiento Médico</h4>
+          <h4 class="modal-title">Registro de Insumos</h4>
         </div>
 
         <div class="modal-body">
 
           <div class="col-lg-12">
             <label for="">Nombre</label>
-            <input type="text" class="form-control" id="txtName" placeholder="Ingrese nombre del procedimiento"><br>
+            <input type="text" class="form-control" id="txtName" placeholder="Ingrese el nombre del insumo" onkeypress="return soloLetras(event)"><br>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Stock</label>
+            <input type="text" class="form-control" id="txtStock" placeholder="Ingrese stock del insumo" maxlength="5" onkeypress="return soloNumeros(event)"><br>
           </div>
 
           <div class="col-lg-12">
@@ -79,7 +84,7 @@
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-primary" onclick="RegisterProcedure()"><i class="fa fa-check"></i> Registrar</button>
+          <button class="btn btn-primary" onclick="RegisterSupply()"><i class="fa fa-check"></i> Registrar</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
         </div>
 
