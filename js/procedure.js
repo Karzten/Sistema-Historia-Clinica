@@ -121,7 +121,7 @@ function UpdateProcedure(){
     var status = $("#cbxStatusEdit").val();
 
     if(new_procedure.length == "0"){
-        Swal.fire("Mensaje de Advertencia", "Debe ingresar un procedimiento médico", "warning");
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar un procedimiento médico", "warning");
     }
 
     $.ajax({
