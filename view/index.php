@@ -281,6 +281,12 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
+          <a onclick="cargar_contenido('contenido_principal','speciality/view_speciality_list.php')">
+            <i class="fa fa-gg"></i> <span>Especialidad</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
         </li>
       </ul>
     </section>
