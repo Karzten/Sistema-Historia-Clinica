@@ -257,6 +257,12 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
+          <a onclick="cargar_contenido('contenido_principal','doctor/view_doctor_list.php')">
+            <i class="fa fa-user-md"></i> <span>Médico</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
           <a onclick="cargar_contenido('contenido_principal','user/view_user_list.php')">
             <i class="fa fa-users"></i> <span>Usuario</span>
             <span class="pull-right-container">
@@ -618,7 +624,7 @@
   function soloLetras(e){
       key = e.keyCode || e.which;
       tecla = String.fromCharCode(key).toLowerCase();
-      letras = "áéíóúabcdefghijklmnñopqrstuvwxyz";
+      letras = "áéíóúabcdefghijklmnñopqrstuvwxyz ";
       especiales = "8-37-39-46";
       tecla_especial = false
       for(var i in especiales){
