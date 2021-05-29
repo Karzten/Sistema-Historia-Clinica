@@ -67,86 +67,94 @@ function OpenModalRegister(){
     $("#register_modal").modal('show');
 }
 
-function RegisterSpeciality(){
-    var name = $("#txtName").val();
-    var status = $("#cbxStatus").val();
 
-    if(name.length == 0){
-        return Swal.fire("Mensaje de Advertencia", "Llenar los campos vacíos", "warning");
+function ListComboRole(){
+    $.ajax({
+        "url":"../controller/user/list_combo_role.php",
+        type:'POST'
+    }).done(function(resp){
+        var data = JSON.parse(resp);
+        var chain = "";
+        if(data.length>0){
+            for(var i = 0; i < data.length; i++){
+                if(data[i][0]=='2'){
+                    chain+="<option value='"+data[i][0]+"'>"+data[i][1]+"</option>";
+                }
+            }
+            $("#cbxRole").html(chain);
+        }else{
+            chain+="<option value=''>NO SE ENCONTRARON DATOS</option>";
+            $("#cbxRole").html(chain);
+        }
+    })
+}
+
+function ListComboSpeciality(){
+    $.ajax({
+        "url":"../controller/doctor/list_combo_speciality.php",
+        type:'POST'
+    }).done(function(resp){
+        var data = JSON.parse(resp);
+        var chain = "";
+        if(data.length>0){
+            for(var i = 0; i < data.length; i++){
+                chain+="<option value='"+data[i][0]+"'>"+data[i][1]+"</option>";
+            }
+            $("#cbxSpeciality").html(chain);
+        }else{
+            chain+="<option value=''>NO SE ENCONTRARON DATOS</option>";
+        }
+    })
+}
+
+function RegisterDoctor(){
+    var document = $("#txtDocument").val();
+    var tuiton = $("#txtTuiton").val();
+    var paternal = $("#txtPaternal").val();
+    var maternal = $("#txtMaternal").val();
+    var name = $("#txtName").val();
+    var gender = $("#cbxGender").val();
+    var cellphone = $("#txtCellphone").val();
+    var phone = $("#txtPhone").val();
+    var adress = $("#txtAdress").val();
+    var date = $("#txtDate").val();
+    var status = $("#cbxStatus").val();
+    var speciality = $("#cbxSpeciality").val();
+    var user = $("#txtUser").val();
+    var password = $("#txtPassword").val();
+    var role = $("#cbxRole").val();
+    var email = $("#txtEmail").val();
+    var validate = $("#validate_email").val();
+
+    if(document.length==0 || tuiton.length==0 || paternal.length==0 || maternal.length==0 || name.length==0 || gender.length==0 || 
+        date.length==0 || status.length==0 || speciality.length==0 || user.length==0 || password.length==0 || role.length==0 || email.length==0){
+        return Swal.fire("Mensaje de Advertencia", "Llene los campos vacíos", "warning");
     }
 
     $.ajax({
-        url:'../controller/speciality/register_speciality.php',
+        url: '../controller/doctor/register_doctor.php',
         type: 'POST',
         data: {
+            document: document,
+            tuiton: tuiton,
+            paternal: paternal,
+            maternal: maternal,
             name: name,
-            status: status
+            gender: gender,
+            cellphone: cellphone,
+            phone: phone,
+            adress: adress,
+            date: date,
+            status: status,
+            speciality: speciality,
+            user: user,
+            password: password,
+            role: role,
+            email: email
         }
     }).done(function(resp){
-        if(resp>0){
-            if(resp==1){
-                $("#register_modal").modal('hide');
-                ListSpeciality();
-                CleanRegister();
-                Swal.fire("Mensaje de Confirmación", "Datos guardados correctamente", "success");
-            }else{
-                CleanRegister();
-                Swal.fire("Mensaje de Advertencia", "La especialidad ya existe", "warning");
-            }
-        }else{
-            Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar el registro", "error");
-        }
+        alert(resp);
     })
+
 }
 
-function CleanRegister(){
-    $("#txtName").val("");
-}
-
-$('#speciality_table').on('click', '.edit', function(){
-    var data = speciality_table.row($(this).parents('tr')).data();
-    if(speciality_table.row(this).child.isShown()){
-        var data = speciality_table.row(this).data();
-    }
-    $("#edit_modal").modal({backdrop:'static', keyboard:false});
-    $("#edit_modal").modal('show');
-
-    $("#speciality_id").val(data.speciality_id);
-    $("#txtCurrentNameEdit").val(data.name);
-    $("#txtNewNameEdit").val(data.name);
-    $("#cbxStatusEdit").val(data.status).trigger("change");
-})
-
-function UpdateSpeciality(){
-    var speciality_id = $("#speciality_id").val();
-    var new_speciality = $("#txtNewNameEdit").val();
-    var current_speciality = $("#txtCurrentNameEdit").val();
-    var status = $("#cbxStatusEdit").val();
-
-    if(new_speciality.length == "0"){
-        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el nombre de la especialidad", "warning");
-    }
-
-    $.ajax({
-        url: '../controller/speciality/update_speciality.php',
-        type: 'POST', 
-        data: {
-            speciality_id : speciality_id,
-            new_speciality : new_speciality,
-            current_speciality : current_speciality,
-            status : status
-        }
-    }).done(function(resp){
-        if(resp>0){
-            $("#edit_modal").modal('hide');
-            if(resp==1){
-                ListSpeciality();
-                Swal.fire("Mensaje de Confirmación", "Datos actualizados correctamente", "success");
-            }else{
-                Swal.fire("Mensaje de Advertencia", "Lo sentimos. La especialidad ya existe.", "warning");
-            }
-        }else{
-            Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar la actualización de datos.", "error");
-        }
-    })
-}
