@@ -176,6 +176,124 @@
     </div>
 </div>
 
+<div class="modal fade" id="edit_modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Editar Médico</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <input type="text" id="doctor_id" hidden>
+              <label for="">N° Documento</label>
+              <input type="text" id="txtCurrentDocumentEdit" hidden>
+              <input type="text" class="form-control" id="txtNewDocumentEdit" placeholder="Ingresar número de documento" onkeypress="return soloNumeros(event)"><br>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="">N° Colegiatura</label>
+              <input type="text" id="txtCurrentTuitonEdit" hidden>
+              <input type="text" class="form-control" id="txtNewTuitonEdit" placeholder="Ingresar número de colegiatura" onkeypress="return soloNumeros(event)" maxLength="5"><br>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="">Apellido Paterno</label>
+              <input type="text" class="form-control" id="txtPaternalEdit" placeholder="Ingrese el apellido paterno" onkeypress="return soloLetras(event)"><br>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="">Apellido Materno</label>
+              <input type="text" class="form-control" id="txtMaternalEdit" placeholder="Ingrese el apellido materno" onkeypress="return soloLetras(event)"><br>
+            </div>
+
+            <div class="col-lg-12">
+              <label for="">Nombre</label>
+              <input type="text" class="form-control" id="txtNameEdit" placeholder="Ingrese nombre del médico" onkeypress="return soloLetras(event)"><br>
+            </div>
+
+            <div class="col-lg-4">
+              <label for="">Sexo</label>
+              <select class="js-example-basic-single" name="state" id="cbxGenderEdit" style="width:100%;">
+                <option value="MASCULINO">MASCULINO</option>
+                <option value="FEMENINO">FEMENINO</option>
+              </select><br><br>
+            </div>
+
+            <div class="col-lg-4">
+              <label for="">Celular</label>
+              <input type="text" class="form-control" id="txtCellphoneEdit" placeholder="Ingrese número de celular" onkeypress="return soloNumeros(event)"><br>
+            </div>
+
+            <div class="col-lg-4">
+              <label for="">Teléfono</label>
+              <input type="text" class="form-control" id="txtPhoneEdit" placeholder="Ingrese número de teléfono" onkeypress="return soloNumeros(event)"><br>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="">Dirección</label>
+              <input type="text" class="form-control" id="txtAdressEdit" placeholder="Ingrese la dirección"><br>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="">Fecha de nacimiento</label>
+              <input type="date" class="form-control" id="txtDateEdit"><br>
+            </div>
+
+            <div class="col-lg-12">
+              <label for="">Estado</label>
+              <select class="js-example-basic-single" name="state" id="cbxStatusEdit" style="width:100%;">
+                <option value="ACTIVO">ACTIVO</option>
+                <option value="INACTIVO">INACTIVO</option>
+              </select><br><br>
+            </div>
+
+            <div class="col-lg-12">
+              <label for="">Especialidad</label>
+              <select class="js-example-basic-single" name="state" id="cbxSpecialityEdit" style="width:100%;">
+              </select><br><br>
+            </div>
+
+            <div class="col-lg-12" style="text-align:center">
+              <b>DATOS DEL USUARIO</b><br><br>
+            </div>
+
+            <div class="col-lg-6">
+              <input type="text" id="user_id" hidden>
+              <label for="">Usuario</label>
+              <input type="text" class="form-control" id="txtUserEdit" disabled><br>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="">Rol</label>
+              <select class="js-example-basic-single" name="state" id="cbxRoleEdit" style="width:100%;" disabled>
+              </select><br><br>
+            </div>
+
+            <div class="col-lg-12">
+              <label for="">Correo electrónico</label>
+              <input type="email" class="form-control" id="txtEmailEdit" placeholder="Ingrese nombre de usuario">
+              <label for="" id="lblEmailEdit" style="color: red;"></label>
+              <input type="text" id="validate_email_edit" hidden>
+            </div>
+
+          </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-primary" onclick="UpdateDoctor()"><i class="fa fa-check"></i> Guardar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+            </div>
+
+        </div>
+          
+
+      </div>
+    </div>
+</div>
+
 <script>
 $(document).ready(function() {
     ListDoctor();

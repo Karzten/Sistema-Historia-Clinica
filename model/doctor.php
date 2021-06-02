@@ -42,6 +42,17 @@
                 $this->connection->close();
             }
         }
+
+        function UpdateDoctor($doctor_id, $current_document, $new_document, $current_tuiton, $new_tuiton, $paternal, $maternal, $name, $gender, $cellphone, $phone, $adress, $date, $speciality, $user_id, $email, $status){
+            $sql = "CALL SP_UPDATE_DOCTOR('$doctor_id', '$current_document', '$new_document', '$current_tuiton', '$new_tuiton', '$paternal', '$maternal', '$name', '$gender', '$cellphone', '$phone', '$adress', '$date', '$speciality', '$user_id', '$email', '$status')";
+            $array = array();
+            if ($query = $this->connection->connection->query($sql)){
+                if ($row = mysqli_fetch_array($query)) {
+                    return $id = trim($row[0]);
+                }
+                $this->connection->close();
+            }
+        }
     }
 
     
