@@ -179,6 +179,10 @@ function RegisterDoctor(){
 
 }
 
+function CleanRegister(){
+
+}
+
 $('#doctor_table').on('click', '.edit', function(){
     var data = doctor_table.row($(this).parents('tr')).data();
     if(doctor_table.row(this).child.isShown()){
