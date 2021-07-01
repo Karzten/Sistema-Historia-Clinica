@@ -96,8 +96,8 @@ function RegisterPatient(){
         return Swal.fire("Mensaje de Advertencia", "Debe ingresar el nombre del paciente", "warning");
     }
 
-    if(cbxStatus.length==0){
-        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el estado del insumo", "warning");
+    if(gender.length == 0){
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el sexo del paciente", "warning");
     }
 
     $.ajax({
@@ -154,42 +154,75 @@ $('#patient_table').on('click', '.edit', function(){
     $("#edit_modal").modal({backdrop:'static', keyboard:false});
     $("#edit_modal").modal('show');
 
-    $("#supply_id").val(data.supply_id);
-    $("#txtCurrentNameEdit").val(data.name);
-    $("#txtNewNameEdit").val(data.name);
-    $("#txtStockEdit").val(data.stock);
+    $("#patient_id").val(data.patient_id);
+    $("#txtCurrentDocumentEdit").val(data.document);
+    $("#txtNewDocumentEdit").val(data.document);
+    $("#txtPaternalEdit").val(data.paternal_surname);
+    $("#txtMaternalEdit").val(data.maternal_surname);
+    $("#txtNameEdit").val(data.name);
+    $("#cbxGenderEdit").val(data.gender);
+    $("#txtCellphoneEdit").val(data.cellphone);
+    $("#txtPhoneEdit").val(data.phone);
+    $("#txtAdressEdit").val(data.adress);
+    $("#txtDateEdit").val(data.date_of_birth);
     $("#cbxStatusEdit").val(data.status).trigger("change");
 })
 
 function UpdatePatient(){
-    var supply_id = $("#supply_id").val();
-    var new_supply = $("#txtNewNameEdit").val();
-    var current_supply = $("#txtCurrentNameEdit").val();
-    var stock = $("#txtStockEdit").val();
+    var patient_id = $("#patient_id").val();
+    var new_document = $("#txtNewDocumentEdit").val();
+    var current_document = $("#txtCurrentDocumentEdit").val();
+    var paternal = $("#txtPaternalEdit").val();
+    var maternal = $("#txtMaternalEdit").val();
+    var name = $("#txtNameEdit").val();
+    var gender = $("#cbxGenderEdit").val();
+    var cellphone = $("#txtCellphoneEdit").val();
+    var phone = $("#txtPhoneEdit").val();
+    var adress = $("#txtAdressEdit").val();
+    var date = $("#txtDateEdit").val();
     var status = $("#cbxStatusEdit").val();
 
-    if(new_supply.length == "0"){
-        Swal.fire("Mensaje de Advertencia", "Debe ingresar el nombre del insumo", "warning");
+    if(paternal.length == 0){
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el apellido paterno del paciente", "warning");
+    }
+
+    if(maternal.length == 0){
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el apellido materno del paciente", "warning");
+    }
+
+    if(name.length == 0){
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el nombre del paciente", "warning");
+    }
+
+    if(gender.length == 0){
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar el sexo del paciente", "warning");
     }
 
     $.ajax({
-        url: '../controller/supply/update_supply.php',
+        url: '../controller/patient/update_patient.php',
         type: 'POST', 
         data: {
-            supply_id : supply_id,
-            new_supply : new_supply,
-            current_supply : current_supply,
-            stock : stock,
+            patient_id : patient_id,
+            current_document: current_document,
+            new_document:new_document,
+            paternal: paternal,
+            maternal: maternal,
+            name: name,
+            gender: gender,
+            cellphone: cellphone,
+            phone: phone,
+            adress: adress,
+            date: date,
             status : status
         }
     }).done(function(resp){
         if(resp>0){
             $("#edit_modal").modal('hide');
             if(resp==1){
-                ListSupply();
+                ListPatient();
                 Swal.fire("Mensaje de Confirmación", "Datos actualizados correctamente", "success");
             }else{
-                Swal.fire("Mensaje de Advertencia", "Lo sentimos. El insumo ya existe.", "warning");
+                Swal.fire("Mensaje de Advertencia", "Lo sentimos. El paciente ya existe.", "warning");
             }
         }else{
             Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar la actualización de datos.", "error");

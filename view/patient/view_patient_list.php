@@ -138,6 +138,90 @@
     </div>
 </div>
 
+<div class="modal fade" id="edit_modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Editar Paciente</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <input type="text" id="patient_id" hidden>
+              <label for="">N° Documento</label>
+              <input type="text" id="txtCurrentDocumentEdit" hidden><br>
+              <input type="text" class="form-control" id="txtNewDocumentEdit" placeholder="Ingresar número de documento" onkeypress="return soloNumeros(event)"><br>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="">Apellido Paterno</label>
+              <input type="text" class="form-control" id="txtPaternalEdit" placeholder="Ingrese el apellido paterno" onkeypress="return soloLetras(event)"><br>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="">Apellido Materno</label>
+              <input type="text" class="form-control" id="txtMaternalEdit" placeholder="Ingrese el apellido materno" onkeypress="return soloLetras(event)"><br>
+            </div>
+
+            <div class="col-lg-12">
+              <label for="">Nombre</label>
+              <input type="text" class="form-control" id="txtNameEdit" placeholder="Ingrese nombre del médico" onkeypress="return soloLetras(event)"><br>
+            </div>
+
+            <div class="col-lg-4">
+              <label for="">Sexo</label>
+              <select class="js-example-basic-single" name="state" id="cbxGenderEdit" style="width:100%;">
+                <option value="">Seleccione su género...</option>
+                <option value="MASCULINO">MASCULINO</option>
+                <option value="FEMENINO">FEMENINO</option>
+              </select><br><br>
+            </div>
+
+            <div class="col-lg-4">
+              <label for="">Celular</label>
+              <input type="text" class="form-control" id="txtCellphoneEdit" placeholder="Ingrese número de celular" onkeypress="return soloNumeros(event)"><br>
+            </div>
+
+            <div class="col-lg-4">
+              <label for="">Teléfono</label>
+              <input type="text" class="form-control" id="txtPhoneEdit" placeholder="Ingrese número de teléfono" onkeypress="return soloNumeros(event)"><br>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="">Dirección</label>
+              <input type="text" class="form-control" id="txtAdressEdit" placeholder="Ingrese la dirección"><br>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="">Fecha de nacimiento</label>
+              <input type="date" class="form-control" id="txtDateEdit"><br>
+            </div>
+
+            <div class="col-lg-12">
+              <label for="">Estado</label>
+              <select class="js-example-basic-single" name="state" id="cbxStatusEdit" style="width:100%;">
+                <option value="ACTIVO">ACTIVO</option>
+                <option value="INACTIVO">INACTIVO</option>
+              </select><br><br>
+            </div>
+
+          </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-primary" onclick="UpdatePatient()"><i class="fa fa-check"></i> Guardar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+            </div>
+
+        </div>
+          
+
+      </div>
+    </div>
+</div>
+
 <script>
 $(document).ready(function() {
     ListPatient();
@@ -146,32 +230,4 @@ $(document).ready(function() {
         $("#txtName").focus();
     })
 } );
-
-document.getElementById('txtEmail').addEventListener('input', function() {
-    campo = event.target;
-    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-    if(emailRegex.test(campo.value)){
-      $(this).css("border","");
-      $("#lblEmail").html("");
-      $("#validate_email").val("Correcto");
-    }else{
-      $(this).css("border", "1px solid red");
-      $("#lblEmail").html("Correo incorrecto");
-      $("#validate_email").val("Incorrecto");
-    }
-});
-
-document.getElementById('txtEmailEdit').addEventListener('input', function() {
-    campo = event.target;
-    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-    if(emailRegex.test(campo.value)){
-      $(this).css("border","");
-      $("#lblEmailEdit").html("");
-      $("#validate_email_edit").val("Correcto");
-    }else{
-      $(this).css("border", "1px solid red");
-      $("#lblEmailEdit").html("Correo incorrecto");
-      $("#validate_email_edit").val("Incorrecto");
-    }
-});
 </script>

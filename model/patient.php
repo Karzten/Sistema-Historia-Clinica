@@ -30,5 +30,16 @@
                 $this->connection->close();
             }
         }
+
+        function UpdatePatient($patient_id, $current_document, $new_document, $paternal, $maternal, $name, $gender, $cellphone, $phone, $adress, $date, $status){
+            $sql = "CALL SP_UPDATE_PATIENT('$patient_id', '$current_document', '$new_document', '$paternal', '$maternal', '$name', '$gender', '$cellphone', '$phone', '$adress', '$date', '$status')";
+            $array = array();
+            if ($query = $this->connection->connection->query($sql)){
+                if ($row = mysqli_fetch_array($query)) {
+                    return $id = trim($row[0]);
+                }
+                $this->connection->close();
+            }
+        }
     }
 ?>
