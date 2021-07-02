@@ -257,6 +257,12 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
+          <a onclick="cargar_contenido('contenido_principal','appointment/view_appointment_list.php')">
+            <i class="fa fa-user-md"></i> <span>Cita</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
           <a onclick="cargar_contenido('contenido_principal','patient/view_patient_list.php')">
             <i class="fa fa-user-md"></i> <span>Paciente</span>
             <span class="pull-right-container">
