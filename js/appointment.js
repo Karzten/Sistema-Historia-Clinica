@@ -67,3 +67,59 @@ function OpenModalRegister(){
     $("#register_modal").modal('show');
 }
 
+function ListComboPatient(){
+    $.ajax({
+        "url":"../controller/appointment/list_combo_patient.php",
+        type:'POST'
+    }).done(function(resp){
+        var data = JSON.parse(resp);
+        var chain = "";
+        if(data.length>0){
+            for(var i = 0; i < data.length; i++){
+                chain+="<option value='"+data[i][0]+"'>"+data[i][1]+"</option>";
+            }
+            $("#cbxPatient").html(chain);
+            $("#cbxPatientEdit").html(chain);
+        }else{
+            chain+="<option value=''>NO SE ENCONTRARON DATOS</option>";
+            $("#cbxPatient").html(chain);
+            $("#cbxPatientEdit").html(chain);
+        }
+    })
+}
+
+function RegisterAppointment(){
+    var patient = $("#cbxPatient").val();
+    var description = $("#txtDescription").val();
+    var user_id = $("#main_id").val();
+
+    if(patient.length==0){
+        return Swal.fire("Mensaje de Advertencia", "Debe seleccionar un paciente", "warning");
+    }
+
+    if(description.length==0){
+        return Swal.fire("Mensaje de Advertencia", "Debe ingresar una descripción", "warning");
+    }
+
+    $.ajax({
+        url: '../controller/appointment/register_appointment.php',
+        type: 'POST',
+        data: {
+            patient: patient,
+            description: description,
+            user_id: user_id
+        }
+    }).done(function(resp){
+        return alert(resp);
+        if(resp>0){
+            $("#register_modal").modal('hide');
+            ListAppointment();
+            CleanRegister();
+            Swal.fire("Mensaje de Confirmación", "Datos guardados correctamente", "success");
+        }else{
+            Swal.fire("Mensaje de Error", "Lo sentimos, no se pudo completar el registro", "error");
+        }
+    })
+
+}
+
