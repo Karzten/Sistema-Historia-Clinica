@@ -110,7 +110,6 @@ function RegisterAppointment(){
             user_id: user_id
         }
     }).done(function(resp){
-        return alert(resp);
         if(resp>0){
             $("#register_modal").modal('hide');
             ListAppointment();
