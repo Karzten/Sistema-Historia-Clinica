@@ -19,7 +19,4 @@ if (mysqli_connect_error()) {
             . mysqli_connect_error());
 }
 
-echo 'Éxito... ' . $mysqli->host_info . "\n";
-
-$mysqli->close();
 ?>
